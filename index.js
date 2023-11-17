@@ -2,14 +2,17 @@ import dotenv from "dotenv";
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import routes from "./routes/route.js";
 // import cors from "cors";
 dotenv.config();
 
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+
 // app.use(cors());
+
+app.use("/api", routes);
 
 app.get("/", (req, res) => {
   res.send("Hello to Dyte API");
