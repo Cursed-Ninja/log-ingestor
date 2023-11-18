@@ -13,7 +13,11 @@ import {
   TablePagination,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const columns = [
   { id: "level", name: "Level", minWidth: 170 },
@@ -31,7 +35,8 @@ function App() {
     level: "",
     message: "",
     resourceId: "",
-    timestamp: "",
+    startTimestamp: dayjs(new Date().toISOString()),
+    endTimestamp: dayjs(new Date().toISOString()),
     traceId: "",
     spanId: "",
     commit: "",
@@ -45,14 +50,20 @@ function App() {
   const rowsPerPage = 25;
 
   const fetchData = async () => {
-    console.log(form);
     try {
       const res = await fetch(
-        `http://localhost:3000/api/logs?page=${page}&level=${form.level}&message=${form.message}&resourceId=${form.resourceId}&timestamp=${form.timestamp}&traceId=${form.traceId}&spanId=${form.spanId}&commit=${form.commit}&parentResourceId=${form.parentResourceId}`
+        `http://localhost:3000/api/logs?page=${page}&level=${
+          form.level
+        }&message=${form.message}&resourceId=${
+          form.resourceId
+        }&startTimestamp=${form.startTimestamp.toISOString()}&endTimestamp=${form.endTimestamp.toISOString()}&traceId=${
+          form.traceId
+        }&spanId=${form.spanId}&commit=${form.commit}&parentResourceId=${
+          form.parentResourceId
+        }`
       );
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
-      console.log(data);
       setRows(data.logs);
       setCount(data.count);
       alert("Search successful!");
@@ -67,7 +78,8 @@ function App() {
       level: "",
       message: "",
       resourceId: "",
-      timestamp: "",
+      startTimestamp: dayjs(new Date().toISOString()),
+      endTimestamp: dayjs(new Date().toISOString()),
       traceId: "",
       spanId: "",
       commit: "",
@@ -118,16 +130,6 @@ function App() {
       fullWidth
     />,
     <TextField
-      id="timestamp"
-      size="small"
-      name="timestamp"
-      variant="outlined"
-      value={form.timestamp}
-      onChange={handleChange}
-      fullWidth
-      type="datetime-local"
-    />,
-    <TextField
       id="traceId"
       size="small"
       label="Trace Id"
@@ -167,6 +169,31 @@ function App() {
       onChange={handleChange}
       fullWidth
     />,
+    <></>,
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DateTimePicker
+        label="Start Timestamp"
+        value={form.startTimestamp}
+        onChange={(newValue) =>
+          setForm((prev) => ({ ...prev, startTimestamp: newValue }))
+        }
+        sx={{
+          width: "100%",
+        }}
+      />
+    </LocalizationProvider>,
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DateTimePicker
+        label="End Timestamp"
+        value={form.endTimestamp}
+        onChange={(newValue) =>
+          setForm((prev) => ({ ...prev, endTimestamp: newValue }))
+        }
+        sx={{
+          width: "100%",
+        }}
+      />
+    </LocalizationProvider>,
   ];
 
   useEffect(() => {

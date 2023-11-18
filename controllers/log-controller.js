@@ -1,10 +1,10 @@
 import Log from "../models/log.js";
 import conn from "../scripts/index.js";
-// import ProduceToKafka from "../kafka/kafka-producer.js";
+import ProduceToKafka from "../kafka/kafka-producer.js";
 
 export const AddLog = async (req, res) => {
   try {
-    // await ProduceToKafka("log", JSON.stringify(req.log));
+    await ProduceToKafka("log", JSON.stringify(req.log));
     res.status(200).json({ message: "Log added successfully" });
   } catch (error) {
     console.log(error);
@@ -25,6 +25,16 @@ export const FetchLog = async (req, res) => {
     if (query.message) {
       query.message = { $regex: query.message };
     }
+
+    if (query.startTimestamp && query.endTimestamp) {
+      query.timestamp = {
+        $gte: query.startTimestamp,
+        $lte: query.endTimestamp,
+      };
+    }
+
+    delete query.startTimestamp;
+    delete query.endTimestamp;
 
     session.startTransaction();
 
@@ -52,7 +62,6 @@ export const FetchLog = async (req, res) => {
       count,
     };
 
-    console.log(logs);
     res.status(200).json(result);
   } catch (error) {
     console.log(error);
