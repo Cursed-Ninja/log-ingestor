@@ -1,5 +1,5 @@
 import kafka from "kafka-node";
-import Log from "../models/log.js";
+import Log from "../../backend/models/log.js";
 
 const init = () => {
   // Configure Kafka consumer
