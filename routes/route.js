@@ -7,7 +7,7 @@ import { AddLog, FetchLog } from "../controllers/log-controller.js";
 
 const router = express.Router();
 
-router.get("/log", FetchLogValidator, FetchLog);
+router.get("/logs", FetchLogValidator, FetchLog);
 router.post("/log", LogSchemaValidator, AddLog);
 
 export default router;

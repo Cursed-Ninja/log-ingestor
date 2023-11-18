@@ -3,15 +3,15 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import routes from "../routes/route.js";
+import cors from "cors";
 
-// import cors from "cors";
 dotenv.config();
 
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 
-// app.use(cors());
+app.use(cors({ origin: "*" }));
 
 app.use("/api", routes);
 

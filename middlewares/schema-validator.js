@@ -51,7 +51,7 @@ export const FetchLogValidator = (req, res, next) => {
 
     const log = Object.fromEntries(
       Object.entries(filters)
-        .filter(([key, value]) => value !== undefined)
+        .filter(([key, value]) => value)
         .map(([key, value]) => {
           if (key == "parentResourceId") {
             return ["metadata", { parentResourceId: value }];
@@ -59,7 +59,6 @@ export const FetchLogValidator = (req, res, next) => {
           return [key, value];
         })
     );
-
     validateSchema(log, fetchLogSchema);
     req.log = log;
     next();
