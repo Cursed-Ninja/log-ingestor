@@ -13,7 +13,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const columns = [
   { id: "level", name: "Level", minWidth: 170 },
@@ -39,23 +39,45 @@ function App() {
   });
 
   const [rows, setRows] = useState([]);
+  const [page, setPage] = useState(0);
+  const [count, setCount] = useState(0);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const rowsPerPage = 25;
+
+  const fetchData = async () => {
     console.log(form);
     try {
       const res = await fetch(
-        `http://localhost:3000/api/logs?level=${form.level}&message=${form.message}&resourceId=${form.resourceId}&timestamp=${form.timestamp}&traceId=${form.traceId}&spanId=${form.spanId}&commit=${form.commit}&parentResourceId=${form.parentResourceId}`
+        `http://localhost:3000/api/logs?page=${page}&level=${form.level}&message=${form.message}&resourceId=${form.resourceId}&timestamp=${form.timestamp}&traceId=${form.traceId}&spanId=${form.spanId}&commit=${form.commit}&parentResourceId=${form.parentResourceId}`
       );
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
       console.log(data);
       setRows(data.logs);
+      setCount(data.count);
       alert("Search successful!");
     } catch (err) {
       console.log(err);
       alert(err);
     }
+  };
+
+  const resetForm = () => {
+    setForm({
+      level: "",
+      message: "",
+      resourceId: "",
+      timestamp: "",
+      traceId: "",
+      spanId: "",
+      commit: "",
+      parentResourceId: "",
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchData();
   };
 
   const handleChange = (e) => {
@@ -147,6 +169,10 @@ function App() {
     />,
   ];
 
+  useEffect(() => {
+    fetchData();
+  }, [page]);
+
   return (
     <>
       <Paper
@@ -178,7 +204,7 @@ function App() {
               {field}
             </Grid>
           ))}
-          <Grid item xs={12} display="flex" justifyContent="center">
+          <Grid item xs={6} display="flex" justifyContent="center">
             <Button
               variant="contained"
               type="submit"
@@ -189,16 +215,34 @@ function App() {
               <SearchIcon sx={{ ml: "10px" }} />
             </Button>
           </Grid>
+          <Grid item xs={6} display="flex" justifyContent="center">
+            <Button
+              variant="contained"
+              color="secondary"
+              sx={{ maxWidth: "250px" }}
+              fullWidth
+              onClick={resetForm}
+            >
+              Reset
+            </Button>
+          </Grid>
         </Grid>
       </Paper>
       <Paper
         sx={{
-          overflow: "hidden",
+          display: "flex",
+          elevation: "1",
+          flexDirection: "column",
+          alignItems: "center",
+          p: 2,
           maxWidth: "750px",
           mx: "auto",
-          p: 2,
+          my: 2,
         }}
       >
+        <Typography mx="auto" variant="h5" gutterBottom>
+          Result
+        </Typography>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -234,6 +278,14 @@ function App() {
             </TableBody>
           </Table>
         </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[]}
+          component="div"
+          count={count}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={(e, newPage) => setPage(newPage)}
+        />
       </Paper>
     </>
   );

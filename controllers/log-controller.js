@@ -1,4 +1,5 @@
 import Log from "../models/log.js";
+import conn from "../scripts/index.js";
 // import ProduceToKafka from "../kafka/kafka-producer.js";
 
 export const AddLog = async (req, res) => {
@@ -12,6 +13,7 @@ export const AddLog = async (req, res) => {
 };
 
 export const FetchLog = async (req, res) => {
+  const session = await conn.startSession();
   try {
     const query = req.log;
 
@@ -24,23 +26,39 @@ export const FetchLog = async (req, res) => {
       query.message = { $regex: query.message };
     }
 
-    const result = await Log.find(query);
-    const logs = result.map((log) => {
-      return {
-        _id: log._id,
-        level: log.level,
-        message: log.message,
-        resourceId: log.resourceId,
-        timestamp: log.timestamp,
-        traceId: log.traceId,
-        spanId: log.spanId,
-        commit: log.commit,
-        parentResourceId: log.metadata.parentResourceId,
-      };
-    });
-    res.status(200).json({logs});
+    session.startTransaction();
+
+    const logs = await Log.find(query, {
+      _id: 1,
+      level: 1,
+      message: 1,
+      timestamp: 1,
+      resourceId: 1,
+      traceId: 1,
+      spanId: 1,
+      commit: 1,
+      parentResourceId: "$metadata.parentResourceId",
+    })
+      .sort({ _id: 1 })
+      .skip(req.query.page * 1)
+      .limit(25);
+
+    const count = await Log.find(query, {}).count();
+
+    await session.commitTransaction();
+
+    const result = {
+      logs,
+      count,
+    };
+
+    console.log(logs);
+    res.status(200).json(result);
   } catch (error) {
     console.log(error);
+    await session.abortTransaction();
     res.status(500).json({ message: "Something went wrong" });
   }
+
+  session.endSession();
 };

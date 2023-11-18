@@ -32,3 +32,6 @@ mongoose
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
   })
   .catch((err) => console.log(err.message));
+
+const connection = mongoose.connection;
+export default connection;

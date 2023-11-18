@@ -51,7 +51,7 @@ export const FetchLogValidator = (req, res, next) => {
 
     const log = Object.fromEntries(
       Object.entries(filters)
-        .filter(([key, value]) => value)
+        .filter(([key, value]) => value && key !== "page")
         .map(([key, value]) => {
           if (key == "parentResourceId") {
             return ["metadata", { parentResourceId: value }];
