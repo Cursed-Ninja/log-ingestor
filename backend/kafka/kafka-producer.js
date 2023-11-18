@@ -1,10 +1,16 @@
 import kafka from "kafka-node";
 
-const user = new kafka.KafkaClient({
-  kafkaHost: "localhost:29092",
+let producer = new kafka.Producer(
+  new kafka.KafkaClient({ kafkaHost: "kafka:29092" })
+);
+
+producer.on("ready", () => {
+  console.log("Connected to Kafka!");
 });
 
-const producer = new kafka.Producer(user);
+producer.on("error", (error) => {
+  console.log("Error connecting to Kafka:", error);
+});
 
 const ProduceToKafka = (topic, message) => {
   return new Promise((resolve, reject) => {
@@ -28,11 +34,6 @@ const ProduceToKafka = (topic, message) => {
     } else {
       reject(new Error("Producer is not ready"));
     }
-
-    producer.on("error", (error) => {
-      console.error("Error connecting to Kafka:", error);
-      reject(error);
-    });
   });
 };
 

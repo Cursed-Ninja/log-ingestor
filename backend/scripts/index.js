@@ -21,9 +21,9 @@ app.get("/", (req, res) => {
 
 const CONNECTION_URL = `mongodb+srv://${
   process.env.DB_USERNAME
-}:${encodeURIComponent(
-  process.env.DB_PSWD
-)}@cluster.lczmihh.mongodb.net/dyte?retryWrites=true&w=majority`;
+}:${encodeURIComponent(process.env.DB_PSWD)}@${process.env.DB_CLUSTER}/${
+  process.env.DB_DATABASE
+}?retryWrites=true&w=majority`;
 const PORT = process.env.PORT;
 
 mongoose

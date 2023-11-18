@@ -1,12 +1,20 @@
 import kafka from "kafka-node";
-import Log from "../../backend/models/log.js";
+import Log from "../models/log.js";
 
 const init = () => {
   // Configure Kafka consumer
-  const consumer = new kafka.Consumer(
-    new kafka.KafkaClient({ kafkaHost: "localhost:29092" }),
+  let consumer = new kafka.Consumer(
+    new kafka.KafkaClient({ kafkaHost: "kafka:29092" }),
     [{ topic: "log" }]
   );
+
+  consumer.on("ready", () => {
+    console.log("Connected to Kafka!");
+  });
+
+  consumer.on("error", (error) => {
+    console.log("Error connecting to Kafka:", error);
+  });
 
   // Consume messages from Kafka broker
   consumer.on("message", async (message) => {
@@ -18,10 +26,6 @@ const init = () => {
     } catch (err) {
       console.log(err);
     }
-  });
-
-  consumer.on("error", (err) => {
-    console.log("Error: ", err);
   });
 
   console.log("Kafka consumer running...");

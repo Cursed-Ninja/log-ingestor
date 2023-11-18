@@ -52,7 +52,7 @@ function App() {
   const fetchData = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/logs?page=${page}&level=${
+        `http://backend:3000/api/logs?page=${page}&level=${
           form.level
         }&message=${form.message}&resourceId=${
           form.resourceId
