@@ -141,7 +141,7 @@ Make sure to install [Docker][docker-url] and [Docker Compose][docker-compose-ur
    ```sh
    docker-compose logs init-kafka
    ```
-   
+
 6. Run the following command to start the remaining containers
    ```sh
    docker-compose up -d backend kafka-microservice frontend
@@ -152,7 +152,7 @@ Make sure to install [Docker][docker-url] and [Docker Compose][docker-compose-ur
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-- The Web UI can be accessed at `http://localhost:8080/`
+- The Web UI for querying can be accessed at `http://localhost:8080/`
 - The backend API can be accessed at `http://localhost:3000/`
 
 - To ingest the logs, make **POST** request to the api endpoint `http://localhost:3000/api/log` with the following payload
