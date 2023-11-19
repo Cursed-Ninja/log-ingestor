@@ -34,6 +34,7 @@
         <li><a href="#web-ui-for-log-querying">Web UI for Log Querying</a></li>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#features">Features</a></li>
       </ul>
     </li>
     <li>
@@ -101,12 +102,30 @@ The project also features a user-friendly Web UI for querying logs, providing a 
 - [![Node][Nodejs]][Nodejs-url]
 - [![MongoDB][MongoDB]][MongoDB-url]
 - [![Kafka][Kafka]][Kafka-url]
+- [![Docker][Docker]][docker-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Architecture
 
 ![Architecture][architecture-image]
+
+### Features
+
+- Mechanism to ingest logs
+- User Interface for full-text search across logs
+- Filters include
+   - level
+   - message
+   - resourceId
+   - start Timestamp
+   - end Timestamp
+   - traceId
+   - spanId
+   - commit
+   - parentResourceId
+- Search within specific date ranges
+- Combination of multiple filters
 
 <!-- GETTING STARTED -->
 
@@ -243,6 +262,7 @@ Project Link: [https://github.com/dyte-submissions/november-2023-hiring-Cursed-N
 [MongoDB-url]: https://www.mongodb.com/
 [Kafka]: https://img.shields.io/badge/Kafka-20232A?style=for-the-badge&logo=apache-kafka&logoColor=61DAFB
 [Kafka-url]: https://kafka.apache.org/
+[Docker]: https://img.shields.io/badge/Docker-20232A?style=for-the-badge&logo=docker&logoColor=61DAFB
 [docker-url]: https://docs.docker.com/get-docker/
 [docker-compose-url]: https://docs.docker.com/compose/install/
 [architecture-image]: images/architecture.png
