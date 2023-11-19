@@ -217,6 +217,9 @@ function App() {
         <Typography variant="h5" gutterBottom>
           Filters
         </Typography>
+        <Typography variant="subtitle1" gutterBottom>
+          Empty filters are not applied
+        </Typography>
         <Grid
           component="form"
           container
