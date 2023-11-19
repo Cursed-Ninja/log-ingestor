@@ -110,7 +110,7 @@ The project also features a user-friendly Web UI for querying logs, providing a 
 
 ### Architecture
 
-![Architecture](architecture.png)
+![Architecture][architecture-image]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
