@@ -46,10 +46,10 @@ services:
       context: ./kafka-microservice
       dockerfile: Dockerfile
     environment:
-      DB_USERNAME: "Cursed_Ninja"
-      DB_PSWD: "@DatabaseatMongoDB#123"
-      DB_CLUSTER: "cluster.lczmihh.mongodb.net"
-      DB_DATABASE: "dyte"
+      DB_USERNAME: "DB_USERNAME"
+      DB_PSWD: "DB_PSWD"
+      DB_CLUSTER: "DB_CLUSTER"
+      DB_DATABASE: "DB_DATABASE"
       KAFKA_PORT: 5000
     depends_on:
       - init-kafka
@@ -61,10 +61,10 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      DB_USERNAME: "Cursed_Ninja"
-      DB_PSWD: "@DatabaseatMongoDB#123"
-      DB_CLUSTER: "cluster.lczmihh.mongodb.net"
-      DB_DATABASE: "dyte"
+      DB_USERNAME: "DB_USERNAME"
+      DB_PSWD: "DB_PSWD"
+      DB_CLUSTER: "DB_CLUSTER"
+      DB_DATABASE: "DB_DATABASE"
       PORT: 3000
     depends_on:
       - init-kafka
