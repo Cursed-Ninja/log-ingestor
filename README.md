@@ -110,7 +110,9 @@ The project also features a user-friendly Web UI for querying logs, providing a 
 
 ### Architecture
 
-![Architecture][architecture-image]
+![Architecture](images/architecture.png)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Features
 
@@ -128,6 +130,7 @@ The project also features a user-friendly Web UI for querying logs, providing a 
   - parentResourceId
 - Search within specific date ranges
 - Combination of multiple filters
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -231,6 +234,8 @@ To deploy the application on the cloud, follow these steps to distribute compone
 - Connect the consumer to MongoDB to store records.
 
 This architecture allows for the independent scaling of each component, making the entire application highly scalable in a cloud environment. Adjust server resources and configurations based on the specific cloud platform requirements. Refer to the appropriate documentation for each component to ensure a smooth deployment process.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Issues
 
