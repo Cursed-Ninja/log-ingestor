@@ -118,7 +118,12 @@ Make sure to install [Docker][docker-url] and [Docker Compose][docker-compose-ur
 
 1. Create and get the mongodb connection string from [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 
-2. In the `docker-compose.yml` file, replace the enviroment variables for `kafka-microservice` and `backend` with the username, password, cluster name and database name from the connection string
+2. Clone the repo
+   ```sh
+   git clone https://github.com/dyte-submissions/november-2023-hiring-Cursed-Ninja.git
+   ```
+
+3. In the `docker-compose.yml` file, replace the enviroment variables for `kafka-microservice` and `backend` with the username, password, cluster name and database name from the connection string
    ```yml
    environment:
       DB_USERNAME: <username>
@@ -126,18 +131,17 @@ Make sure to install [Docker][docker-url] and [Docker Compose][docker-compose-ur
       DB_CLUSTER: <cluster-name>
       DB_DATABASE: <database-name>
    ```
-3. Clone the repo
-   ```sh
-   git clone https://github.com/dyte-submissions/november-2023-hiring-Cursed-Ninja.git
-   ```
+
 4. Run the following command to start the project
    ```sh
    docker-compose up -d zookeeper kafka init-kafka
    ```
+
 5. Check the logs of the `init-kafka` container to see if the topics have been created by running the following command
    ```sh
    docker-compose logs init-kafka
    ```
+   
 6. Run the following command to start the remaining containers
    ```sh
    docker-compose up -d backend kafka-microservice frontend
