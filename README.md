@@ -80,6 +80,8 @@ The Log Ingestor is a robust system designed to efficiently handle and process l
    - A dedicated consumer consumes logs from the Kafka broker.
    - Consumed logs are stored in MongoDB for persistent storage.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Web UI for Log Querying
 
 The project also features a user-friendly Web UI for querying logs, providing a seamless experience for users to interact with the log data.
@@ -115,17 +117,18 @@ The project also features a user-friendly Web UI for querying logs, providing a 
 - Mechanism to ingest logs
 - User Interface for full-text search across logs
 - Filters include
-   - level
-   - message
-   - resourceId
-   - start Timestamp
-   - end Timestamp
-   - traceId
-   - spanId
-   - commit
-   - parentResourceId
+  - level
+  - message
+  - resourceId
+  - start Timestamp
+  - end Timestamp
+  - traceId
+  - spanId
+  - commit
+  - parentResourceId
 - Search within specific date ranges
 - Combination of multiple filters
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 
