@@ -44,6 +44,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#deployment-on-the-cloud">Deployment on the Cloud</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -181,9 +182,37 @@ Make sure to install [Docker][docker-url] and [Docker Compose][docker-compose-ur
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Deployment on the Cloud
+
+To deploy the application on the cloud, follow these steps to distribute components across servers, ensuring scalability:
+
+### Frontend
+
+- Deploy the frontend on a single server, handling user interface interactions.
+
+### Backend
+
+- Run the backend on multiple servers to handle increased loads.
+- Introduce a load balancer to evenly distribute requests among backend servers.
+
+### Kafka Broker
+
+- Deploy the Kafka broker on a dedicated server to receive logs from the producer.
+
+### Consumer
+
+- Run the consumer on a separate server to process messages from the Kafka broker.
+- Scale the consumer server as needed to manage increased workloads.
+
+### MongoDB Integration
+
+- Connect the consumer to MongoDB to store records.
+
+This architecture allows for the independent scaling of each component, making the entire application highly scalable in a cloud environment. Adjust server resources and configurations based on the specific cloud platform requirements. Refer to the appropriate documentation for each component to ensure a smooth deployment process.
+
 ## Issues
 
-- The app fails to start if the `init-kafka` fails to create the topic. The container then needs to be restarted manually.
+- The app fails to start if the `init-kafka` fails to create the topic. The container then needs to be restarted.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
