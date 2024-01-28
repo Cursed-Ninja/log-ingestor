@@ -148,7 +148,7 @@ Make sure to install [Docker][docker-url] and [Docker Compose][docker-compose-ur
 2. Clone the repo
 
    ```sh
-   git clone https://github.com/Cursed-Ninja/log-ingestor.git.git
+   git clone https://github.com/Cursed-Ninja/log-ingestor.git
    ```
 
 3. In the `docker-compose.yml` file, replace the enviroment variables for `kafka-microservice` and `backend` with the username, password, cluster name and database name from the connection string
@@ -271,4 +271,4 @@ Project Link: [https://github.com/Cursed-Ninja/log-ingestor](https://github.com/
 [Docker]: https://img.shields.io/badge/Docker-20232A?style=for-the-badge&logo=docker&logoColor=61DAFB
 [docker-url]: https://docs.docker.com/get-docker/
 [docker-compose-url]: https://docs.docker.com/compose/install/
-[architecture-image]: images/architecture.png
+[architecture-image]: architecture.png
