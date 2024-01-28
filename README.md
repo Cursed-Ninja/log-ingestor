@@ -1,5 +1,3 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/2sZOX9xt)
-
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 
 <a id="readme-top"></a>
@@ -150,7 +148,7 @@ Make sure to install [Docker][docker-url] and [Docker Compose][docker-compose-ur
 2. Clone the repo
 
    ```sh
-   git clone https://github.com/dyte-submissions/november-2023-hiring-Cursed-Ninja.git
+   git clone https://github.com/Cursed-Ninja/log-ingestor.git.git
    ```
 
 3. In the `docker-compose.yml` file, replace the enviroment variables for `kafka-microservice` and `backend` with the username, password, cluster name and database name from the connection string
@@ -255,7 +253,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Project Link: [https://github.com/dyte-submissions/november-2023-hiring-Cursed-Ninja](https://github.com/dyte-submissions/november-2023-hiring-Cursed-Ninja)
+Project Link: [https://github.com/Cursed-Ninja/log-ingestor](https://github.com/Cursed-Ninja/log-ingestor)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
